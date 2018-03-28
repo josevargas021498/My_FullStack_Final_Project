@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S"
+        crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display" rel="stylesheet">
+    <link href="index.css" rel="stylesheet">
+    <title>Singup-Login</title>
+</head>
+
+<body>
+    <div class="blank" style="height: 16em;">
+        <p>If It Ain't Scrubbin' It Ain't Thuggin'...</p>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="title">
+                    <h1>
+                        <i class="far fa-info" id="icon"></i>Ride
+                        <sup>XOR</sup>
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form_area">
+                    <form action="#">
+                        <label for="unme">
+                            <b>Username: </b>
+                        </label>
+                        <input id="unme" type="text" placeholder="Enter Username" name="unme" required>
+                        <br>
+                        <label for="pw">
+                            <b>Password: </b>
+                        </label>
+                        <input id="pw" type="password" placeholder="Enter Password" name="pw" required>
+                        <br>
+                        <div class="lgnbtns">
+                            <button type="submit">Login</button>
+                            <button type="button" class="cancelbtn">Cancel</button>
+                        </div>
+                    </form>
+
+                    <button id="sign-up-form-button">Signup</button>
+
+                </div>
+            </div>
+        </div>
+        <div class="blank2" style="height: 10em;"></div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="su_form_area" style="display: none">
+                    <h1>Sign Up</h1>
+                    <form action="#">
+                        <label for="fnme">
+                            <b>First Name: </b>
+                        </label>
+                        <input id="fnme" type="text" placeholder="First Name" name="fnme" required>
+                        <div class="ferr"></div>
+                        <br>
+                        <label for="lnme">
+                            <b>Last Name: </b>
+                        </label>
+                        <input id="lnme" type="text" placeholder="Last Name" name="lnme" required>
+                        <br>
+                        <label for="email">
+                            <b>e-Mail: </b>
+                        </label>
+                        <input id="email" type="text" placeholder="e-mail" name="email" required>
+                        <br>
+                        <label for="cun">
+                            <b>Create Username: </b>
+                        </label>
+                        <input id="cun" type="username" placeholder="Username" name="cun" required>
+                        <br>
+                        <label for="cpw">
+                            <b>Create Password: </b>
+                        </label>
+                        <input id="cpw" type="password" placeholder="Password" name="cpw" required>
+                        <br>
+                        <label for="ccpw">
+                            <b>Confirm Password: </b>
+                        </label>
+                        <input id="ccpw" type="password" placeholder="Re-enter Password" name="ccpw" required>
+                        <br>
+                        <div class="subtns">
+                            <button type="submit">Signup</button>
+                            <button type="button" class="cancelbtn">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/jquery"></script>
+    <script src="index.js"></script>
+
+</body>
+
+</html>
