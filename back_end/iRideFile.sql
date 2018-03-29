@@ -34,6 +34,7 @@
 
 CREATE TABLE IF NOT EXISTS wheels (
     id SERIAL UNIQUE PRIMARY KEY,
+    imge TEXT,
     brand VARCHAR(100),
     model VARCHAR(100),
     price INT,
@@ -41,25 +42,25 @@ CREATE TABLE IF NOT EXISTS wheels (
     stock INT
 );
 
-INSERT INTO wheels (id, brand, model, price, dscrptn, stock) VALUES -----
-(1, 'Fuel', 'Hostage', 1400, 'The Fuel Hostage ... ', 17),
-(2, 'Fuel', 'Assault', 1349, 'The Fuel Assault ... ', 13),
-(3, 'Fuel', 'Vapor', 1250, 'The Fuel Vapor ... ', 19),
-(4, 'Fuel', 'Lethal', 1300, 'The Fuel Lethal ... ', 15),
-(5, 'XD', 'Moster II', 1219, 'The XD Monster II ... ', 13),
-(6, 'XD', 'Rockstar II', 1499, 'The XD Rockstar II ... ', 23),
-(7, 'XD', 'Rockstar 3', 1599, 'The XD Rockstar 3 ... ', 11),
-(8, 'Dick Cepek', 'DC2', 985, 'The Dick Cepek DC2 ... ', 12),
-(9, 'Moto Metal', 'MO970', 1399, 'The Moto Metal MO970 ... ', 11),
-(10, 'Moto Metal', 'MO975', 1399, 'The Moto Metal MO975 ... ', 21),
-(11, 'Moto Metal', 'MO969', 1299, 'The Moto Metal MO969 ... ', 19),
-(12, 'XTreme Mudder', 'XM-318', 1279, 'The XTreme Mudder XM-318 ... ', 13),
-(13, 'XTreme Mudder', 'XM-314', 1299, 'The XTreme Mudder XM-314 ... ', 17),
-(14, 'XTreme Mudder', 'XM-319 Silver', 1479, 'The XTreme Mudder XM-319 Silver', 13), 
-(15, 'XTreme Mudder', 'XM-318 Silver', 1399, 'The XTreme Mudder XM-318 SIlver', 11),
-(16, 'WORX', 'Clash', 1259, 'The WORX Clash ... ', 19),
-(17, 'WORX', 'Beast 803SB', 1399, 'The WORX Beast 803SB ...', 14),
-(18, 'WORX', 'Clash Silver', 1499, 'The WORX Clash Silver ... ', 10);
+INSERT INTO wheels (id, imge, brand, model, price, dscrptn, stock) VALUES -----
+(1, 'https://images.customwheeloffset.com/wheels/fuel/hostage/hostage_black_17x9_white.jpg', 'Fuel', 'Hostage', 1400, 'The Fuel Hostage ... ', 17),
+(2, 'https://images.customwheeloffset.com/wheels/fuel/assault/assault_black_white.jpg', 'Fuel', 'Assault', 1349, 'The Fuel Assault ... ', 13),
+(3, 'https://images.customwheeloffset.com/wheels/fuel/vapor/vapor_black_white.jpg', 'Fuel', 'Vapor', 1250, 'The Fuel Vapor ... ', 19),
+(4, 'https://images.customwheeloffset.com/wheels/fuel/lethal/lethal_texturedblackpowdercoat_1pc_white.jpg', 'Fuel', 'Lethal', 1300, 'The Fuel Lethal ... ', 15),
+(5, 'https://images.customwheeloffset.com/wheels/xd/xd822/xd822_black_white.jpg', 'XD', 'Moster II', 1219, 'The XD Monster II ... ', 13),
+(6, 'https://images.customwheeloffset.com/wheels/xd/xs811/xs811_black_white.jpg', 'XD', 'Rockstar II', 1499, 'The XD Rockstar II ... ', 23),
+(7, 'https://images.customwheeloffset.com/wheels/xd/xs827/xs827_black_white.jpg', 'XD', 'Rockstar 3', 1599, 'The XD Rockstar 3 ... ', 11),
+(8, 'https://images.customwheeloffset.com/wheels/dickcepek/dc2/dc2_black_white.jpg', 'Dick Cepek', 'DC2', 985, 'The Dick Cepek DC2 ... ', 12),
+(9, 'https://images.customwheeloffset.com/wheels/motometal/mo970/mo970_black_white.jpg', 'Moto Metal', 'MO970', 1399, 'The Moto Metal MO970 ... ', 11),
+(10, 'https://images.customwheeloffset.com/wheels/motometal/mo975/mo975_blackmilled_white.jpg', 'Moto Metal', 'MO975', 1399, 'The Moto Metal MO975 ... ', 21),
+(11, 'https://images.customwheeloffset.com/wheels/motometal/mo969/mo969_black_white.jpg', 'Moto Metal', 'MO969', 1299, 'The Moto Metal MO969 ... ', 19),
+(12, 'https://images.customwheeloffset.com/wheels/xtrememudder/xm318/xm318_blackmilled_white.jpg', 'XTreme Mudder', 'XM-318', 1279, 'The XTreme Mudder XM-318 ... ', 13),
+(13, 'https://images.customwheeloffset.com/wheels/xtrememudder/xm314/xm314_blackmilled_white.jpg', 'XTreme Mudder', 'XM-314', 1299, 'The XTreme Mudder XM-314 ... ', 17),
+(14, 'https://images.customwheeloffset.com/wheels/xtrememudder/xm319/xm319_chromeblack_white.jpg', 'XTreme Mudder', 'XM-319 Silver', 1479, 'The XTreme Mudder XM-319 Silver', 13), 
+(15, 'https://images.customwheeloffset.com/wheels/xtrememudder/xm318/xm318_chrome_white.jpg', 'XTreme Mudder', 'XM-318 Silver', 1399, 'The XTreme Mudder XM-318 SIlver', 11),
+(16, 'https://images.customwheeloffset.com/wheels/worx/clash/clash_black_6lug_white.jpg', 'WORX', 'Clash', 1259, 'The WORX Clash ... ', 19),
+(17, 'https://images.customwheeloffset.com/wheels/worx/beastii/beastii_black_white.jpg', 'WORX', 'Beast 803SB', 1399, 'The WORX Beast 803SB ...', 14),
+(18, 'https://images.customwheeloffset.com/wheels/worx/destroyer/destroyer_black_8lug_white.jpg', 'WORX', 'Destroyer', 1499, 'The WORX Destroyer ... ', 10);
 
 
 

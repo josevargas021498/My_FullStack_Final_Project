@@ -1,7 +1,7 @@
 package com.example.backend.controllers;
 
-import com.example.backend.core.Accessory;
-import com.example.backend.db.Accessories;
+import com.example.backend.core.User;
+import com.example.backend.db.Users;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,14 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class AccessoryController {
+public class UserController {
 
-    @CrossOrigin()
-    @GetMapping("/accessories")
-    public List<Accessory> all() {
+    @CrossOrigin
+    @GetMapping("/users")
+    public List<User> all() {
 
-        return Accessories.all();
-
+        return Users.all();
     }
-
 }

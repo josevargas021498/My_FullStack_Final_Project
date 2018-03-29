@@ -24,6 +24,7 @@ public class Accessories {
     }
 
     public static List<Accessory> all() {
+
         try {
             Connection c = connect();
             PreparedStatement st = c.prepareStatement("SELECT * FROM wheels;");
@@ -33,6 +34,7 @@ public class Accessories {
             while (rs.next()) {
                 allAccessories.add(new Accessory(
                         rs.getInt("id"),
+                        rs.getString("imge"),
                         rs.getString("brand"),
                         rs.getString("model"),
                         rs.getInt("price"),
