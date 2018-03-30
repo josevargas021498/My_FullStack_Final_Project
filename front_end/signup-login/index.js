@@ -156,6 +156,33 @@ function sucpwLengthCheck() {
   });
 }
 
+function postSignupToServer() {
+  $("#Signup").on("submit", function(event) {
+    event.preventDefault();
+    $.ajax({
+      url: "http://localhost:8080/userSignup",
+      type: "POST",
+      data: JSON.stringify({
+        f_name: $("#fnme").val(),
+        l_nme: $("#lnme").val(),
+        usrnme: $("#cun").val(),
+        pw: $("#cpw").val()
+      }),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json"
+    })
+      .then(function successfulSignUp(data) {
+        console.log(data);
+        localStorage.setItem("key", data.key);
+        window.location = "../page/index.html?username=" + $("#cun").val();
+      })
+      .catch(function unsuccessfulSignUp(response) {
+        console.log(response.status);
+        console.log(response.responseJSON);
+      });
+  });
+}
+
 function main() {
   sufnLengthCheck();
   sufnNumCheck();
@@ -167,6 +194,7 @@ function main() {
   sucunLengthCheck();
   sucunNoSPChar();
   sucpwLengthCheck();
+  postSignupToServer();
 }
 
 $(main);
