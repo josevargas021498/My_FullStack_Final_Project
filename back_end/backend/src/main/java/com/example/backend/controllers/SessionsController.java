@@ -3,9 +3,8 @@ package com.example.backend.controllers;
 import com.example.backend.core.Credentials;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import javax.xml.transform.Result;
+import java.sql.*;
 //import sun.security.krb5.Credentials;
 
 @RestController
@@ -31,6 +30,24 @@ public class SessionsController {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
+    }
+
+    @GetMapping("/userLogin")
+    public void userLogin(@RequestBody Credentials user) {
+
+        try (Connection conn = DriverManager.getConnection(
+                "jdbc:postgresql:iRide", "josevargas9817", "Everest1953");
+             PreparedStatement st = conn.prepareStatement("SELECT usrnme, pw FROM users");
+             ResultSet rs = st.executeQuery();
+
+             while (rs.next()) {
+
+        }
+        ) {
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        })
     }
 
 //    @GetMapping("/login")
