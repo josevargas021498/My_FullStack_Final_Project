@@ -15,7 +15,7 @@ public class SessionsController {
 
         try (Connection conn = DriverManager.getConnection(
                 "jdbc:postgresql:iRide", "josevargas9817", "Everest1953");) {
-            PreparedStatement st = conn.prepareStatement("INSERT INTO users (f_name, l_name, usrnme, pw) VALUES (?, ?, ?, ?)");
+            PreparedStatement st = conn.prepareStatement("INSERT INTO users IF NOT EXISTS(f_name, l_name, usrnme, pw) VALUES (?, ?, ?, ?)");
 
             st.setString(1, newUSer.f_name);
             st.setString(2, newUSer.l_name);
@@ -36,22 +36,21 @@ public class SessionsController {
     public void userLogin(@RequestBody Credentials user) {
 
         try (Connection conn = DriverManager.getConnection(
-                "jdbc:postgresql:iRide", "josevargas9817", "Everest1953");
-             PreparedStatement st = conn.prepareStatement("SELECT usrnme, pw FROM users");
-             ResultSet rs = st.executeQuery();
+                "jdbc:postgresql:iRide", "josevargas9817", "Everest1953"); ) {
+            PreparedStatement st = conn.prepareStatement("SELECT usrnme, pw FROM users");
+            ResultSet rs = st.executeQuery();
 
-             while (rs.next()) {
-
-        }
-        ) {
-        } catch (SQLException e) {
+            while (rs.next()) {
+                
+            }
+        }  catch (SQLException e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-        })
+        }
     }
 
-//    @GetMapping("/login")
-//    public String login(@RequestBody Credentials credentials){
-//        return "This is an example!";
-//    }
+    @GetMapping("/login")
+    public String login(@RequestBody Credentials credentials){
+        return "This is an example!";
+    }
 }
