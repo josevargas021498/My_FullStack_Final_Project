@@ -175,8 +175,38 @@ function postSignupToServer() {
         console.log(data);
         localStorage.setItem("key", data.key);
         window.location = "../page/index.html?username=" + $("#cun").val();
+        window.location.replace();
       })
       .catch(function unsuccessfulSignUp(response) {
+        console.log(response.status);
+        console.log(response.responseJSON);
+      });
+  });
+}
+
+function getLoginFromServer() {
+  $("#login").on("submit", function(event) {
+    event.preventDefault();
+    console.log($("#unme").val());
+    $.ajax({
+      url: "http://localhost:8080/userLogin",
+      type: "POST",
+      data: JSON.stringify({
+        usrnme: $("#unme").val(),
+        pw: $("#pw").val()
+      }),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json"
+    })
+      .then(function successfulLogin(data) {
+        event.preventDefault();
+        console.log(data);
+        window.localStorage.setItem("username", data);
+        //   window.location =
+        //     "/Users/josevargas9817/FINAL-PROJECT/front_end/page/index.html";
+        // });
+      })
+      .catch(function unsuccessfulLogin(response) {
         console.log(response.status);
         console.log(response.responseJSON);
       });
@@ -195,6 +225,7 @@ function main() {
   sucunNoSPChar();
   sucpwLengthCheck();
   postSignupToServer();
+  getLoginFromServer();
 }
 
 $(main);

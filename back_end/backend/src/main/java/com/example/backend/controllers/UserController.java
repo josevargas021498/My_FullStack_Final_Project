@@ -4,6 +4,7 @@ import com.example.backend.core.User;
 import com.example.backend.db.Users;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,4 +18,5 @@ public class UserController {
 
         return Users.all();
     }
+
 }
