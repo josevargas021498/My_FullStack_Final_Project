@@ -157,29 +157,35 @@ function sucpwLengthCheck() {
 }
 
 function postSignupToServer() {
-  $("#Signup").on("submit", function(event) {
+  $("#signup").on("submit", function(event) {
     event.preventDefault();
+    console.log("Trying Create unme: " + $("#cun").val());
+    console.log("Trying Create pw: " + $("#cpw").val());
+
     $.ajax({
       url: "http://localhost:8080/userSignup",
       type: "POST",
       data: JSON.stringify({
-        f_name: $("#fnme").val(),
-        l_nme: $("#lnme").val(),
         usrnme: $("#cun").val(),
         pw: $("#cpw").val()
       }),
       contentType: "application/json; charset=utf-8",
       dataType: "json"
     })
+
       .then(function successfulSignUp(data) {
+        event.preventDefault();
+        console.log("Trying Log Data");
         console.log(data);
-        localStorage.setItem("key", data.key);
-        window.location = "../page/index.html?username=" + $("#cun").val();
+        // localStorage.setItem("username", data);
+        // window.location = "../page/index.html?username=" + $("#cun").val();
+        window.location = "../page/index.html";
         window.location.replace();
       })
       .catch(function unsuccessfulSignUp(response) {
-        console.log(response.status);
-        console.log(response.responseJSON);
+        console.log("Error Creating Account!");
+        console.log("Status: " + response.status);
+        console.log("JSON: " + response.responseJSON);
       });
   });
 }
@@ -189,6 +195,7 @@ function getLoginFromServer() {
     event.preventDefault();
     console.log("Trying Log unme: " + $("#unme").val());
     console.log("Trying Log pw: " + $("#pw").val());
+
     $.ajax({
       url: "http://localhost:8080/userLogin",
       type: "POST",
@@ -200,10 +207,11 @@ function getLoginFromServer() {
       contentType: "application/json; charset=utf-8",
       dataType: "json"
     })
+
       .then(function successfulLogin(data) {
         event.preventDefault();
         console.log(data);
-        window.localStorage.setItem("username", data); // --- Comment (prevents redirect to show data)
+        // window.localStorage.setItem("username", data); // --- Comment (prevents redirect to show data)
         window.location = "../page/index.html";
 
         // /Users/josevargas9817/FINAL-PROJECT/front_end/

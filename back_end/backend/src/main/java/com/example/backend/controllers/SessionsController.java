@@ -17,25 +17,35 @@ public class SessionsController {
 
     @CrossOrigin()
     @PostMapping(path="/userSignup")
-    public void addNewUser (@RequestBody Credentials newUSer) {
+    public User addNewUser (@RequestBody Credentials credentials) {
 
-        try (Connection conn = DriverManager.getConnection(
-                "jdbc:postgresql:iRide", "josevargas9817", "Everest1953");) {
-            PreparedStatement st = conn.prepareStatement("INSERT INTO users (f_name, l_name, usrnme, pw) VALUES (?, ?, ?, ?)");
-
-            st.setString(1, newUSer.f_name);
-            st.setString(2, newUSer.l_name);
-            st.setString(3, newUSer.usrnme);
-            st.setString(4, newUSer.pw);
-
-            int rowaadded = st.executeUpdate();
-            System.out.println("Row added: " + rowaadded);
+        try {
+            return users.getUserByUserNameAndPassword(credentials.usrnme, credentials.pw);
 
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
+
+        return null;
+//        try (Connection conn = DriverManager.getConnection(
+//                "jdbc:postgresql:iRide", "josevargas9817", "Everest1953");) {
+//            PreparedStatement st = conn.prepareStatement("INSERT INTO USERS (usrnme, pw) VALUES (?, ?)");
+//
+//            st.setString(1, credentials.usrnme);
+//            st.setString(2, credentials.pw);
+//
+//            int rowadded = st.executeUpdate();
+//            System.out.println("Row added: " + rowadded);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+//            System.exit(0);
+//        }
+//
+//        return null;
     }
     @CrossOrigin
     @PostMapping("/userLogin")

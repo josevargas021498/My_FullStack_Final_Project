@@ -23,32 +23,29 @@ public class Users {
         }
     }
 
-    public User getUserByIdUserNameAndPassword(Integer id, String usrnme, String pw) {
+    public User getUserByUserNameAndPassword(String usrnme, String pw) {
 
         User user;
 
-        final String sql = "SELECT * FROM users WHERE id = ? usrnme = ? AND pw = ?";
+        final String sql = "SELECT * FROM users WHERE usrnme = ? AND pw = ?";
 
         try {
             Connection c = connect();
             PreparedStatement st = c.prepareStatement(sql);
-            st.setInt(1, id);
-            st.setString(2, usrnme);
-            st.setString(3, pw);
+            st.setString(1, usrnme);
+            st.setString(2, pw);
 
-            ResultSet rs = st.executeQuery();
+            ResultSet rs;
+            rs = st.executeQuery();
 
             //System.out.println("Going through here: "+ rs.next());
             if (rs.next()) {
                 user = new User();
                 System.out.println("Adding values");
-                user.id = rs.getInt("id");
-                System.out.println("Adding Id: " + rs.getInt("id"));
                 user.userName = rs.getString("usrnme");
                 System.out.println("Adding username: " + rs.getString("pw"));
                 user.passWordHash = rs.getString("pw");
                 System.out.println("Adding password: " + rs.getString("pw"));
-
 
 
             } else {
