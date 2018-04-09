@@ -187,11 +187,13 @@ function postSignupToServer() {
 function getLoginFromServer() {
   $("#login").on("submit", function(event) {
     event.preventDefault();
-    console.log($("#unme").val());
+    console.log("Trying Log unme: " + $("#unme").val());
+    console.log("Trying Log pw: " + $("#pw").val());
     $.ajax({
       url: "http://localhost:8080/userLogin",
       type: "POST",
       data: JSON.stringify({
+        // id: url.sql("SELECT id FROM users WHERE usrnme = '" + usrnme + "'"),
         usrnme: $("#unme").val(),
         pw: $("#pw").val()
       }),
@@ -201,14 +203,15 @@ function getLoginFromServer() {
       .then(function successfulLogin(data) {
         event.preventDefault();
         console.log(data);
-        window.localStorage.setItem("username", data);
-        //   window.location =
-        //     "/Users/josevargas9817/FINAL-PROJECT/front_end/page/index.html";
-        // });
+        window.localStorage.setItem("username", data); // --- Comment (prevents redirect to show data)
+        window.location = "../page/index.html";
+
+        // /Users/josevargas9817/FINAL-PROJECT/front_end/
       })
       .catch(function unsuccessfulLogin(response) {
-        console.log(response.status);
-        console.log(response.responseJSON);
+        console.log("Error Matching Account Information!");
+        console.log("Status: " + response.status);
+        console.log("JSON: " + response.responseJSON);
       });
   });
 }

@@ -29,26 +29,5 @@ public class User {
     }
 
 
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//    public String getfirstName() {
-//        return firstName;
-//    }
-//
-//    public String getlastName() {
-//        return lastName;
-//    }
-//
-//    public String getuserName() {
-//        return userName;
-//    }
-//
-//    public String getpassWordHash() {
-//        return passWordHash;
-//    }
-
-
 
 }
