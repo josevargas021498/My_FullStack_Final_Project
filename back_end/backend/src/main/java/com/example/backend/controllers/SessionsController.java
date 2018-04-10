@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
+import java.util.Random;
 //import sun.security.krb5.Credentials;
 
 @RestController
@@ -38,6 +39,8 @@ public class SessionsController {
         return null;
     }
 
+
+
     @CrossOrigin
     @PostMapping("/userLogin")
     public User userLogin(@RequestBody Credentials credentials) {
@@ -53,6 +56,23 @@ public class SessionsController {
 
         return null;
 
+    }
+
+    String CreateSessionKey(){
+        String alphChars = "abcdefghijklmonpqrstuvwxyz0123456789!@#$%^&*(){}[]?.";
+        String sessionKey ="";
+
+        Random random = new Random();
+
+        int random_int = 12 + random.nextInt(9);
+
+        for(int i =0; i < random_int; i++){
+
+            char c = alphChars.charAt(random.nextInt(26));
+            sessionKey += c;
+        }
+
+        return sessionKey;
     }
 
 
