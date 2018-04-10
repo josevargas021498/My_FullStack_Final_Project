@@ -23,7 +23,7 @@ public class Users {
         }
     }
 
-    public User getUserByUserNameAndPassword(String usrnme, String pw) {
+    public static User getUserByUserNameAndPassword(String usrnme, String pw) {
 
         User user;
 
@@ -35,8 +35,7 @@ public class Users {
             st.setString(1, usrnme);
             st.setString(2, pw);
 
-            ResultSet rs;
-            rs = st.executeQuery();
+            ResultSet rs = st.executeQuery();
 
             //System.out.println("Going through here: "+ rs.next());
             if (rs.next()) {

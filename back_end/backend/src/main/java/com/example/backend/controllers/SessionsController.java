@@ -16,11 +16,18 @@ public class SessionsController {
     private Users users;
 
     @CrossOrigin()
-    @PostMapping(path="/userSignup")
-    public User addNewUser (@RequestBody Credentials credentials) {
+    @PostMapping(path = "/userSignup")
+    public User addNewUser(@RequestBody Credentials credentials) {
 
-        try {
-            return users.getUserByUserNameAndPassword(credentials.usrnme, credentials.pw);
+        try (Connection conn = DriverManager.getConnection("jdbc:postgresql:iRide", "josevargas9817", "Everest1953");) {
+            PreparedStatement st = conn.prepareStatement("INSERT INTO USERS (usrnme, pw) VALUES (?, ?)");
+
+            st.setString(1, credentials.usrnme);
+            st.setString(2, credentials.pw);
+
+            int rowadded = st.executeUpdate();
+            System.out.println("Row added: " + rowadded);
+            return Users.getUserByUserNameAndPassword(credentials.usrnme, credentials.pw);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -29,32 +36,16 @@ public class SessionsController {
         }
 
         return null;
-//        try (Connection conn = DriverManager.getConnection(
-//                "jdbc:postgresql:iRide", "josevargas9817", "Everest1953");) {
-//            PreparedStatement st = conn.prepareStatement("INSERT INTO USERS (usrnme, pw) VALUES (?, ?)");
-//
-//            st.setString(1, credentials.usrnme);
-//            st.setString(2, credentials.pw);
-//
-//            int rowadded = st.executeUpdate();
-//            System.out.println("Row added: " + rowadded);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-//            System.exit(0);
-//        }
-//
-//        return null;
     }
+
     @CrossOrigin
     @PostMapping("/userLogin")
     public User userLogin(@RequestBody Credentials credentials) {
 
         try {
-            return users.getUserByUserNameAndPassword(credentials.usrnme, credentials.pw);
+            return Users.getUserByUserNameAndPassword(credentials.usrnme, credentials.pw);
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -63,23 +54,6 @@ public class SessionsController {
         return null;
 
     }
-//    @GetMapping("/userLogin")
-//    public void userLogin(@RequestBody Credentials user) {
-//
-//        try (Connection conn = DriverManager.getConnection(
-//                "jdbc:postgresql:iRide", "josevargas9817", "Everest1953"); ) {
-//            PreparedStatement st = conn.prepareStatement("SELECT usrnme, pw FROM users");
-//            ResultSet rs = st.executeQuery();
-//
-//            while (rs.next()) {
-//
-//            }
-//        }  catch (SQLException e) {
-//            e.printStackTrace();
-//            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-//        }
-//    }
-
 
 
 }

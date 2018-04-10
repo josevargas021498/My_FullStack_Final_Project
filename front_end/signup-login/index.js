@@ -156,6 +156,42 @@ function sucpwLengthCheck() {
   });
 }
 
+// function postSignupToServer() {
+//   $("#signup").on("submit", function(event) {
+//     event.preventDefault();
+//     console.log("Trying Create unme: " + $("#cun").val());
+//     console.log("Trying Create pw: " + $("#cpw").val());
+
+//     $.ajax({
+//       url: "http://localhost:8080/userSignup",
+//       type: "POST",
+//       data: JSON.stringify({
+//         usrnme: $("#cun").val(),
+//         pw: $("#cpw").val()
+//       }),
+//       contentType: "application/json; charset=utf-8",
+//       dataType: "json"
+//     })
+//       .then(function successfulSignUp(data) {
+//         event.preventDefault();
+//         console.log("Trying Log Data");
+//         console.log(data);
+//         localStorage.setItem("key", data.key);
+//         // window.location = "../page/index.html?username=" + $("#cun").val();
+//         window.location = "../page/index.html";
+// window.location.replace();
+//       })
+//       .catch(function unsuccessfulSignUp(response) {
+//         console.log("Error Creating Account!");
+//         console.log("Status: " + response.status);
+//         console.log("JSON: " + response.responseJSON);
+//       });
+//   });
+// }
+
+// ------------------------------------------------------ DO NOT MESS WITH THIS -------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------------- //
+
 function postSignupToServer() {
   $("#signup").on("submit", function(event) {
     event.preventDefault();
@@ -164,26 +200,23 @@ function postSignupToServer() {
 
     $.ajax({
       url: "http://localhost:8080/userSignup",
-      type: "POST",
+      method: "POST",
+      dataType: "json",
+      crossDomain: true,
       data: JSON.stringify({
         usrnme: $("#cun").val(),
         pw: $("#cpw").val()
       }),
-      contentType: "application/json; charset=utf-8",
-      dataType: "json"
+      contentType: "application/json; charset=utf-8"
     })
-
       .then(function successfulSignUp(data) {
         event.preventDefault();
-        console.log("Trying Log Data");
         console.log(data);
-        // localStorage.setItem("username", data);
-        // window.location = "../page/index.html?username=" + $("#cun").val();
+        // window.localStorage.setItem("key", data.key);
         window.location = "../page/index.html";
         window.location.replace();
       })
       .catch(function unsuccessfulSignUp(response) {
-        console.log("Error Creating Account!");
         console.log("Status: " + response.status);
         console.log("JSON: " + response.responseJSON);
       });
@@ -198,7 +231,7 @@ function getLoginFromServer() {
 
     $.ajax({
       url: "http://localhost:8080/userLogin",
-      type: "POST",
+      method: "POST",
       data: JSON.stringify({
         // id: url.sql("SELECT id FROM users WHERE usrnme = '" + usrnme + "'"),
         usrnme: $("#unme").val(),
