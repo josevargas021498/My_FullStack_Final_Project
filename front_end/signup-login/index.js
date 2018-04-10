@@ -257,6 +257,25 @@ function getLoginFromServer() {
   });
 }
 
+function userLogout() {
+  $("#logout").click(function(event) {
+    event.preventDefault();
+    console.log(event);
+  });
+  $.ajax({
+    url: "http://localhost:8080/logout/",
+    method: "POST",
+    crossDomain: true,
+    contentType: "application/json; charset=utf-8",
+    dataType: "json"
+  })
+    .then(function successfulLogout(response) {
+      window.location.replace("login.html");
+    })
+    .catch(function unsuccessfulLogout(err) {
+      console.log(err);
+    });
+}
 function main() {
   sufnLengthCheck();
   sufnNumCheck();
