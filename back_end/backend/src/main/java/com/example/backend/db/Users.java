@@ -23,17 +23,18 @@ public class Users {
         }
     }
 
-    public static User getUserByUserNameAndPassword(String usrnme, String pw) {
+    public static User getUserByUserNameAndPassword(String usrnme, String pw, String sessionkey) {
 
         User user;
 
-        final String sql = "SELECT * FROM users WHERE usrnme = ? AND pw = ?";
+        final String sql = "SELECT * FROM users WHERE usrnme = ? AND pw = ? AND sessionkey = ?";
 
         try {
             Connection c = connect();
             PreparedStatement st = c.prepareStatement(sql);
             st.setString(1, usrnme);
             st.setString(2, pw);
+            st.setString(3, sessionkey);
 
             ResultSet rs = st.executeQuery();
 
@@ -42,9 +43,11 @@ public class Users {
                 user = new User();
                 System.out.println("Adding values");
                 user.userName = rs.getString("usrnme");
-                System.out.println("Adding username: " + rs.getString("pw"));
+                System.out.println("Added username: " + rs.getString("pw"));
                 user.passWordHash = rs.getString("pw");
-                System.out.println("Adding password: " + rs.getString("pw"));
+                System.out.println("Added password: " + rs.getString("pw"));
+                user.sessionkey = rs.getString("sessionkey");
+
 
 
             } else {
@@ -77,7 +80,8 @@ public class Users {
                         rs.getString("f_name"),
                         rs.getString("l_name"),
                         rs.getString("usrnme"),
-                        rs.getString("pw")
+                        rs.getString("pw"),
+                        rs.getString("sessionkey")
                 ));
             }
             return allUsers;

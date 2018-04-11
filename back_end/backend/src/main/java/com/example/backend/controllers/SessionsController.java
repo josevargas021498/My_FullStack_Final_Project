@@ -21,14 +21,15 @@ public class SessionsController {
     public User addNewUser(@RequestBody Credentials credentials) {
 
         try (Connection conn = DriverManager.getConnection("jdbc:postgresql:iRide", "josevargas9817", "Everest1953");) {
-            PreparedStatement st = conn.prepareStatement("INSERT INTO USERS (usrnme, pw) VALUES (?, ?)");
+            PreparedStatement st = conn.prepareStatement("INSERT INTO USERS (usrnme, pw, sessionkey) VALUES (?, ?, ?)");
 
             st.setString(1, credentials.usrnme);
             st.setString(2, credentials.pw);
+            st.setString(3, credentials.sessionkey);
 
             int rowadded = st.executeUpdate();
             System.out.println("Row added: " + rowadded);
-            return Users.getUserByUserNameAndPassword(credentials.usrnme, credentials.pw);
+            return Users.getUserByUserNameAndPassword(credentials.usrnme, credentials.pw, credentials.sessionkey);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -37,6 +38,7 @@ public class SessionsController {
         }
 
         return null;
+
     }
 
 
@@ -46,7 +48,7 @@ public class SessionsController {
     public User userLogin(@RequestBody Credentials credentials) {
 
         try {
-            return Users.getUserByUserNameAndPassword(credentials.usrnme, credentials.pw);
+            return Users.getUserByUserNameAndPassword(credentials.usrnme, credentials.pw, credentials.sessionkey);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,7 +60,7 @@ public class SessionsController {
 
     }
 
-    String CreateSessionKey(){
+    public static String CreateSessionKey(){
         String alphChars = "abcdefghijklmonpqrstuvwxyz0123456789!@#$%^&*(){}[]?.";
         String sessionKey ="";
 
@@ -68,8 +70,9 @@ public class SessionsController {
 
         for(int i =0; i < random_int; i++){
 
-            char c = alphChars.charAt(random.nextInt(26));
-            sessionKey += c;
+            char rc = alphChars.charAt(random.nextInt(26));
+
+            sessionKey += rc;
         }
 
         return sessionKey;

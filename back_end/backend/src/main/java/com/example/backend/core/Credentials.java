@@ -5,15 +5,17 @@ public class Credentials {
     public String l_name;
     public String usrnme;
     public String pw;
+    public String sessionkey;
 
     public Credentials() {}
 
-    public Credentials (String f_name, String l_name, String usrnme, String pw) {
+    public Credentials (String f_name, String l_name, String usrnme, String pw, String sessionkey) {
 
         this.f_name = f_name;
         this.l_name = l_name;
         this.usrnme = usrnme;
         this.pw = pw;
+        this.sessionkey = sessionkey;
 
 
     }

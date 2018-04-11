@@ -23,7 +23,9 @@ public class Accessories {
         }
     }
 
-    public static List<Accessory> all() {
+
+
+    public static List<Accessory> allWheels() {
 
         try {
             Connection c = connect();

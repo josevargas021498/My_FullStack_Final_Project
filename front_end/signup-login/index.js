@@ -205,7 +205,8 @@ function postSignupToServer() {
       crossDomain: true,
       data: JSON.stringify({
         usrnme: $("#cun").val(),
-        pw: $("#cpw").val()
+        pw: $("#cpw").val(),
+        sessionkey: ""
       }),
       contentType: "application/json; charset=utf-8"
     })
@@ -235,7 +236,8 @@ function getLoginFromServer() {
       data: JSON.stringify({
         // id: url.sql("SELECT id FROM users WHERE usrnme = '" + usrnme + "'"),
         usrnme: $("#unme").val(),
-        pw: $("#pw").val()
+        pw: $("#pw").val(),
+        sessionkey: ""
       }),
       contentType: "application/json; charset=utf-8",
       dataType: "json"
