@@ -34,12 +34,13 @@ body {
   padding: 2px;
 }
 .top_menu a {
-  margin-left: 1.5em;
+  margin-left: 55em;
+
   padding: 12px 15px 20px 32px;
   text-decoration: none;
   font-size: 25px;
   color: #858585;
-  display: inline-block;
+
   transition: 0.4s;
 }
 .top_menu a:hover {
@@ -84,8 +85,12 @@ body {
   background-color: rgba(0, 0, 255, 0.021);
 }
 .de h3 {
-  font-size: 1.5em;
+  font-size: 2em;
   text-align: left;
+}
+.de h1 {
+  font-size: 5em;
+  text-decoration: underline;
 }
 
 #js-data {
@@ -96,6 +101,12 @@ body {
   padding: 15px;
   height: 42em;
   width: 40em;
+}
+
+#ordbtn {
+  width: 15em;
+
+  border-style: groove;
 }
 
 /* --------------------------------------------------------------------------------- */
