@@ -214,8 +214,8 @@ function postSignupToServer() {
         event.preventDefault();
         console.log(data);
         // window.localStorage.setItem("key", data.key);
-        window.location = "../page/index.html";
-        window.location.replace();
+        // window.location = "../page/index.html";
+        window.location.replace("../page/index.html");
       })
       .catch(function unsuccessfulSignUp(response) {
         console.log("Status: " + response.status);
@@ -234,10 +234,8 @@ function getLoginFromServer() {
       url: "http://localhost:8080/userLogin",
       method: "POST",
       data: JSON.stringify({
-        // id: url.sql("SELECT id FROM users WHERE usrnme = '" + usrnme + "'"),
         usrnme: $("#unme").val(),
-        pw: $("#pw").val(),
-        sessionkey: ""
+        pw: $("#pw").val()
       }),
       contentType: "application/json; charset=utf-8",
       dataType: "json"
@@ -246,12 +244,13 @@ function getLoginFromServer() {
       .then(function successfulLogin(data) {
         event.preventDefault();
         console.log(data);
-        // window.localStorage.setItem("username", data); // --- Comment (prevents redirect to show data)
+        window.localStorage.setItem("key", data.key); // --- Comment (prevents redirect to show data)
         window.location = "../page/index.html";
 
         // /Users/josevargas9817/FINAL-PROJECT/front_end/
       })
       .catch(function unsuccessfulLogin(response) {
+        alert("Username Of Password Is Not Correct");
         console.log("Error Matching Account Information!");
         console.log("Status: " + response.status);
         console.log("JSON: " + response.responseJSON);
@@ -259,25 +258,25 @@ function getLoginFromServer() {
   });
 }
 
-function userLogout() {
-  $("#logout").click(function(event) {
-    event.preventDefault();
-    console.log(event);
-  });
-  $.ajax({
-    url: "http://localhost:8080/logout/",
-    method: "POST",
-    crossDomain: true,
-    contentType: "application/json; charset=utf-8",
-    dataType: "json"
-  })
-    .then(function successfulLogout(response) {
-      window.location.replace("login.html");
-    })
-    .catch(function unsuccessfulLogout(err) {
-      console.log(err);
-    });
-}
+// function userLogout() {
+//   $("#logout").click(function(event) {
+//     event.preventDefault();
+//     console.log(event);
+//   });
+//   $.ajax({
+//     url: "http://localhost:8080/logout/",
+//     method: "POST",
+//     crossDomain: true,
+//     contentType: "application/json; charset=utf-8",
+//     dataType: "json"
+//   })
+//     .then(function successfulLogout(response) {
+//       window.location.replace("index.html");
+//     })
+//     .catch(function unsuccessfulLogout(err) {
+//       console.log(err);
+//     });
+// }
 function main() {
   sufnLengthCheck();
   sufnNumCheck();

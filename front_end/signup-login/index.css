@@ -38,7 +38,11 @@ body {
 }
 
 .lgnbtns {
+  margin-left: 4em;
   padding: 8px 8px 8px 8px;
+}
+#sign-up-form-button {
+  margin-left: 4em;
 }
 .su_form_area {
   text-align: left;

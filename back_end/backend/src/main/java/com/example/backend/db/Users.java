@@ -1,5 +1,7 @@
 package com.example.backend.db;
 
+import com.example.backend.controllers.SessionsController;
+import com.example.backend.core.Credentials;
 import com.example.backend.core.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,18 +25,17 @@ public class Users {
         }
     }
 
-    public static User getUserByUserNameAndPassword(String usrnme, String pw, String sessionkey) {
+    public static User getUserByUserNameAndPassword(String usrnme, String pw) {
 
         User user;
 
-        final String sql = "SELECT * FROM users WHERE usrnme = ? AND pw = ? AND sessionkey = ?";
+        final String sql = "SELECT * FROM users WHERE usrnme = ? AND pw = ?";
 
         try {
             Connection c = connect();
             PreparedStatement st = c.prepareStatement(sql);
             st.setString(1, usrnme);
             st.setString(2, pw);
-            st.setString(3, sessionkey);
 
             ResultSet rs = st.executeQuery();
 
@@ -45,8 +46,6 @@ public class Users {
                 user.userName = rs.getString("usrnme");
                 System.out.println("Added username: " + rs.getString("pw"));
                 user.passWordHash = rs.getString("pw");
-                System.out.println("Added password: " + rs.getString("pw"));
-                user.sessionkey = rs.getString("sessionkey");
 
 
 
@@ -66,6 +65,16 @@ public class Users {
 
     }
 
+    public static boolean logoutUser(Integer id, String key) throws SQLException {
+        Connection c = connect();
+        PreparedStatement st = c.prepareStatement(
+                "UPDATE users SET sessionkey = NULL WHERE sessionkey = ? AND  id = ? RETURNING *;"
+        );
+        st.setString(1, key);
+        st.setInt(2, id);
+        return st.execute();
+    }
+
     public static List<User> all() {
 
         try {
@@ -77,8 +86,6 @@ public class Users {
             while (rs.next()) {
                 allUsers.add(new User(
                         rs.getInt("id"),
-                        rs.getString("f_name"),
-                        rs.getString("l_name"),
                         rs.getString("usrnme"),
                         rs.getString("pw"),
                         rs.getString("sessionkey")
@@ -93,6 +100,43 @@ public class Users {
             return null;
         }
 
+
+    }
+
+    public static String createSessionKey(String usrnme) throws SQLException {
+        String key = SessionsController.createSessionKey();
+
+        Connection c = connect();
+
+        PreparedStatement st = c.prepareStatement(
+                "UPDATE users SET sessionkey = ? WHERE usrnme = ? RETURNING *;"
+        );
+
+        st.setString(1, key);
+        st.setString(2, usrnme);
+
+        st.execute();
+
+        return key;
+
+
+
+    }
+
+    public static boolean usernamePasswordMatches(Credentials credentials) throws SQLException {
+        Connection c = connect();
+
+        PreparedStatement st = c.prepareStatement(
+                "SELECT COUNT(*) AS count FROM users WHERE usrnme = ? AND pw = ?;"
+        );
+
+        st.setString(1, credentials.usrnme);
+        st.setString(2, credentials.pw);
+
+        ResultSet rs = st.executeQuery();
+
+        rs.next();
+        return rs.getInt("count") == 1;
 
     }
 }

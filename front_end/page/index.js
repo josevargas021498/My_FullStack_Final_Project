@@ -50,7 +50,7 @@ function showWheel(image, brand, model, price, stock) {
   HTML +=
     "<h4> <a href='https://www.wheelsforless.com/offroad_wheels_and_tires.htm'><b>Complete Wheel Set Ups Here! </b></a></h4> <h4><b>Life Time Warrantee!</h4></b>";
   HTML +=
-    "<button id='ordbtn' onclick='buyWheel(" + stock + ")'> Order It!</button>";
+    "<a href='https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjNlprXlLXaAhVqm-AKHdPCDrcQFggnMAA&url=https%3A%2F%2Fwww.customwheeloffset.com%2F&usg=AOvVaw2ASiZ1Dc7xV5tZOYUuFMkR' id='ordbtn' > Order It!</a>";
   HTML += "</div><br>";
   var le_sde = "<h1>SPECS</h1>";
 
@@ -60,19 +60,10 @@ function showWheel(image, brand, model, price, stock) {
   le_sde += "<h3><b>Brand: </b>" + brand + "</h3><hr>";
   le_sde += "<h3><b>Model: </b>" + model + "</h3><hr>";
   le_sde += "<h3><b>Price(4): $</b>" + price + "</h3><hr>";
-  le_sde += "<h3 id='stck'><b>Stock: </b>" + stock + "</h3><hr>";
+  le_sde += "<h3><b>Popularity(0-25): </b>" + stock + "</h3><hr>";
 
   $(".area-main").html(HTML);
   $(".de").html(le_sde);
-}
-
-function buyWheel(stock) {
-  $("#ordbtn").on("click", function() {
-    if (stock != 0) {
-      console.log(stock);
-      stock -= 1;
-    }
-  });
 }
 
 // function showWheel(image, brand, dscrptn, model, price, stock) {
@@ -94,8 +85,31 @@ function buyWheel(stock) {
 
 //   $(".area-main").html(HTML);
 //   $(".de").html(le_sde);
-// }
+// }t
+function logoutButton(id) {
+  $("#button").html(
+    '<button onclick="Logout(' + id + ')"><b>Log-Out</b></button>'
+  );
+}
+function Logout(id) {
+  $.ajax({
+    url: "http://localhost:8080/logout/" + id,
+    method: "POST",
+    crossDomain: true,
+    contentType: "application/json; charset=utf-8",
+    dataType: "json"
+  })
+    .then(function successfulShowWheels(response) {
+      event.preventDefault();
+      console.log(data);
+      window.location("../signup-login/index.html");
+    })
 
+    .catch(function successfulShowWheels(response) {
+      console.log("Status: " + response.status);
+      console.log("JSON: " + response.responseJSON);
+    });
+}
 function showAllWheels() {
   $.ajax({
     url: "http://localhost:8080/accessories",
@@ -106,11 +120,6 @@ function showAllWheels() {
   })
     .then(function successfulShowWheels(response) {
       console.log(response);
-      var sell = response
-        .map(function(x) {
-          return buyWheel(x);
-        })
-        .join("");
       var wheel =
         '<div id="wheel"><h1><strong>WHEELS</strong></h1><hr></div>' +
         response
@@ -132,6 +141,7 @@ function draw() {
 
 function main() {
   draw();
+  logoutButton();
 }
 
 $(main());

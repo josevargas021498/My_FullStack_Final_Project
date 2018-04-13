@@ -15,7 +15,6 @@ public class UserController {
     @CrossOrigin
     @GetMapping("/users")
     public List<User> all() {
-
         return Users.all();
     }
 
