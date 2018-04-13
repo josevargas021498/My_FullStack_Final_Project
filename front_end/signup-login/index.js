@@ -213,7 +213,7 @@ function postSignupToServer() {
       .then(function successfulSignUp(data) {
         event.preventDefault();
         console.log(data);
-        // window.localStorage.setItem("key", data.key);
+        window.localStorage.setItem("key", data.key);
         // window.location = "../page/index.html";
         window.location.replace("../page/index.html");
       })
