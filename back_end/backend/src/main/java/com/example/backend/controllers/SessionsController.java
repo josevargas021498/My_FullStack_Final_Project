@@ -19,27 +19,23 @@ public class SessionsController {
 
     @CrossOrigin()
     @PostMapping(path = "/userSignup")
-    public User addNewUser(@RequestBody Credentials credentials) {
+    public SessionKey addNewUser(@RequestBody Credentials credentials) {
 
         String sessionKey = createSessionKey();
 
         try (Connection conn = DriverManager.getConnection("jdbc:postgresql:iRide", "josevargas9817", "Everest1953");) {
-            PreparedStatement st = conn.prepareStatement("INSERT INTO USERS(id, usrnme, pw, sessionkey) VALUES (?, ?, ?, ?) Returning *");
+            PreparedStatement st = conn.prepareStatement("INSERT INTO USERS(usrnme, pw, sessionkey) VALUES (?, ?, ?) Returning *");
 
-            st.setInt(1, Integer.parseInt(("id")));
-            st.setString(3, credentials.usrnme);
-            st.setString(3, credentials.pw);
-            st.setString(4, sessionKey);
+            st.setString(1, credentials.usrnme);
+            st.setString(2, credentials.pw);
+            st.setString(3, sessionKey);
 
             ResultSet rowadded = st.executeQuery();
             rowadded.next();
             conn.close();
+
             System.out.println("Row added: " + rowadded);
-            return new User(rowadded.getInt("id"),
-                    rowadded.getString("usrnme"),
-                    rowadded.getString("pw"),
-                    rowadded.getString("sessionkey")
-                    );
+            return new SessionKey(sessionKey);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -101,9 +97,10 @@ public class SessionsController {
 
     }
 
-    @PostMapping("/logout/{id}")
-    public Boolean logout(@PathVariable Integer id, @RequestBody SessionKey key) throws SQLException {
-        return Users.logoutUser(id, key.key);
+    @CrossOrigin
+    @PostMapping("/logout")
+    public Boolean logout(@RequestBody SessionKey key) throws SQLException {
+        return Users.logoutUser(key.key);
     }
 
 

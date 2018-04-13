@@ -65,13 +65,15 @@ public class Users {
 
     }
 
-    public static boolean logoutUser(Integer id, String key) throws SQLException {
+    public static boolean logoutUser(String key) throws SQLException {
         Connection c = connect();
         PreparedStatement st = c.prepareStatement(
-                "UPDATE users SET sessionkey = NULL WHERE sessionkey = ? AND  id = ? RETURNING *;"
+                "UPDATE users SET sessionkey = NULL WHERE sessionkey = ? RETURNING *;"
+
         );
+        System.out.println(key);
         st.setString(1, key);
-        st.setInt(2, id);
+        
         return st.execute();
     }
 

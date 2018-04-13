@@ -93,16 +93,19 @@ function logoutButton(id) {
 }
 function Logout(id) {
   $.ajax({
-    url: "http://localhost:8080/logout/" + id,
+    url: "http://localhost:8080/logout",
     method: "POST",
     crossDomain: true,
     contentType: "application/json; charset=utf-8",
-    dataType: "json"
+    dataType: "json",
+    data: JSON.stringify({
+      key: window.localStorage.getItem("key")
+    })
   })
     .then(function successfulShowWheels(response) {
-      event.preventDefault();
-      console.log(data);
-      window.location("../signup-login/index.html");
+      console.log(response);
+      window.localStorage.removeItem("key");
+      window.location = "../signup-login/index.html";
     })
 
     .catch(function successfulShowWheels(response) {
