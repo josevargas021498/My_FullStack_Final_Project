@@ -213,7 +213,7 @@ function postSignupToServer() {
       .then(function successfulSignUp(data) {
         event.preventDefault();
         console.log(data);
-        window.localStorage.setItem("key", data.key);
+        window.localStorage.setItem("sessionKey", data.key);
         // window.location = "../page/index.html";
         window.location.replace("../page/index.html");
       })
@@ -244,7 +244,7 @@ function getLoginFromServer() {
       .then(function successfulLogin(data) {
         event.preventDefault();
         console.log(data);
-        window.localStorage.setItem("key", data.key); // --- Comment (prevents redirect to show data)
+        window.localStorage.setItem("sessionKey", data.key); // --- Comment (prevents redirect to show data)
         window.location = "../page/index.html";
 
         // /Users/josevargas9817/FINAL-PROJECT/front_end/

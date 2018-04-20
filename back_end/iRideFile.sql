@@ -64,8 +64,15 @@ INSERT INTO wheels (id, imge, brand, model, price, dscrptn, stock) VALUES -----
 
 
 
-
 ----- MANIPULATION -----
+ALTER TABLE wheels ADD size VARCHAR(100);
+ALTER TABLE wheels ADD ofst VARCHAR(100);
+
+
+UPDATE wheels SET size = '20x12.5' WHERE id = 1;
+UPDATE wheels SET ofst = '-44' WHERE id = 1;
+UPDATE wheels SET link = 'https://www.customwheeloffset.com/buy-wheel-offset/D53120401745/fuel-hostage-20x14-76-custom-wheels?suspension=Stock&trimming=No+trimming' WHERE id=1;
+
 -- INSERT INTO wheels (id, name, dmtr, width, whl_offset, stock, brnd_id) VALUES -----
 
 -- (1, 'Hostage', 20, 12, -44, 21, 1),

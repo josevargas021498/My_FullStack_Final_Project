@@ -14,6 +14,7 @@ import java.util.Random;
 
 @RestController
 public class SessionsController {
+
     @Resource
     private Users users;
 
@@ -38,42 +39,16 @@ public class SessionsController {
             return new SessionKey(sessionKey);
 
         } catch (Exception e) {
+
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
+
         }
 
         return null;
 
     }
-
-
-
-//    @CrossOrigin(allowedHeaders="*",allowCredentials="true")
-//    @PostMapping("/SignUp")
-//    public Member signUp(@RequestBody SignUp newMem) {
-//        String hashedPassword = BCrypt.hashpw(newMem.password, salt);
-//
-//        String sessionKey = createSessionKey();
-//
-//        Member newMember = MemberRepository.insertMember(
-//                newMem.memberName,
-//                newMem.age,
-//                newMem.phoneNumber,
-//                newMem.githubLink,
-//                hashedPassword,
-//                newMem.gender,
-//                sessionKey);
-//
-//        if (newMember != null) {
-//            return newMember;
-//        } else {
-//            System.out.println("JSON IS WRONG JO'TAVIOUS");
-//            return null;
-//        }
-//    }
-
-
 
     @CrossOrigin
     @PostMapping("/userLogin")
@@ -81,16 +56,20 @@ public class SessionsController {
 
         try {
             if (Users.usernamePasswordMatches(credentials)) {
+
                 String key = Users.createSessionKey(credentials.usrnme);
                 return new SessionKey(key);
+
             } else {
                 return null;
             }
 
         } catch (Exception e) {
+
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
+
         }
 
         return null;
@@ -107,6 +86,7 @@ public class SessionsController {
 
 
     public static String createSessionKey(){
+
         String alphChars = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*();[]{}\\|,./<>?`~-=_+";
         String sessionKey ="";
 

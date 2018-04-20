@@ -87,10 +87,12 @@ function showWheel(image, brand, model, price, stock) {
 //   $(".de").html(le_sde);
 // }t
 function logoutButton(id) {
-  $("#button").html(
+  $("#logout-button").html(
     '<button onclick="Logout(' + id + ')"><b>Log-Out</b></button>'
   );
 }
+
+/* --------------------------------------------------- LogOut --------------------------------------------------- */
 function Logout(id) {
   $.ajax({
     url: "http://localhost:8080/logout",
@@ -99,12 +101,12 @@ function Logout(id) {
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     data: JSON.stringify({
-      key: window.localStorage.getItem("key")
+      key: window.localStorage.getItem("sessionKey")
     })
   })
     .then(function successfulShowWheels(response) {
       console.log(response);
-      window.localStorage.removeItem("key");
+      window.localStorage.removeItem("sessionKey");
       window.location = "../signup-login/index.html";
     })
 
@@ -113,6 +115,41 @@ function Logout(id) {
       console.log("JSON: " + response.responseJSON);
     });
 }
+
+/* ------------------------------------------------------------------------------------------------------ */
+
+function deleteAccountButton(key) {
+  $("#del-acc-button").html(
+    '<button onclick="deleteUser(' + key + ')"><b>Delete Account</b></button>'
+  );
+}
+/* -------------------------------------------------- Delete User -------------------------------------------------- */
+function deleteUser(key) {
+  $.ajax({
+    url: "http://localhost:8080/deleteUser",
+    method: "POST",
+    crossDomain: true,
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    data: JSON.stringify({
+      sessionkey: window.localStorage.getItem("sessionKey")
+    })
+  })
+    .then(function successfulUserDelete(response) {
+      console.log(response);
+      window.localStorage.removeItem("sessionKey");
+      window.location = "../signup-login/index.html";
+    })
+    .catch(function unsuccessfulUserDelete(response) {
+      console.log("Status: " + response.status);
+      console.log("JSON: " + response.responseJSON);
+      window.localStorage.removeItem("sessionKey");
+      window.location = "../signup-login/index.html";
+    });
+}
+
+/* ---------------------------------------------------------------------------------------------------- */
+
 function showAllWheels() {
   $.ajax({
     url: "http://localhost:8080/accessories",
@@ -145,6 +182,7 @@ function draw() {
 function main() {
   draw();
   logoutButton();
+  deleteAccountButton();
 }
 
 $(main());

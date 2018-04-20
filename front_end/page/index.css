@@ -34,15 +34,7 @@ body {
   padding: 2px;
 }
 .top_menu button {
-  background-color: white;
-  margin-left: 55em;
-
-  padding: 12px 15px 20px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #858585;
-
-  transition: 0.4s;
+  float: right;
 }
 .top_menu a:hover {
   text-decoration: none;
@@ -68,7 +60,7 @@ body {
   top: 0;
   right: 0;
   border-style: solid;
-  border-width: 0.05px;
+  border-width: 1px;
   background-color: rgba(255, 255, 255, 0.021);
   text-align: center;
   overflow: auto;
@@ -199,3 +191,7 @@ p:hover {
   margin-top: 1em;
   display: inline-block;
 } */
+.tpbtns div {
+  display: inline-block;
+  padding: 5px;
+}
