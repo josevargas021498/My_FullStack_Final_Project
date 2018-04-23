@@ -24,7 +24,7 @@ public class SessionsController {
 
         String sessionKey = createSessionKey();
 
-        try (Connection conn = DriverManager.getConnection("jdbc:postgresql:iRide", "josevargas9817", "Everest1953");) {
+        try (Connection conn = DriverManager.getConnection("jdbc:postgresql:iRide", "basecamp", "Everest1953");) {
             PreparedStatement st = conn.prepareStatement("INSERT INTO USERS(usrnme, pw, sessionkey) VALUES (?, ?, ?) Returning *");
 
             st.setString(1, credentials.usrnme);

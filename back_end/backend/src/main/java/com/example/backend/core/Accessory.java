@@ -11,10 +11,13 @@ public class Accessory {
     public Integer price;
     public String description;
     public Integer stock;
+    public String size;
+    public String ofst;
+    public String link;
 
     public Accessory() {}
 
-    public Accessory(Integer id, String image, String brand, String model, Integer price, String description, Integer stock) {
+    public Accessory(Integer id, String image, String brand, String model, Integer price, String description, Integer stock, String size, String ofst, String link) {
 
         this.id  = id;
         this.image = image;
@@ -23,13 +26,16 @@ public class Accessory {
         this.price = price;
         this.description = description;
         this.stock = stock;
+        this.size = size;
+        this.ofst = ofst;
+        this.link = link;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Accessory[id=%d, image='%s', brand='%s', model='%s', price='%d', description='%s', stock='%s']",
-                id, brand, model, price, description, stock);
+                "Accessory[id=%d, image='%s', brand='%s', model='%s', price='%d', description='%s', stock='%s', size='%s', ofst='%s', link='%s']",
+                id, brand, model, price, description, stock, size, ofst, link);
     }
 
 }

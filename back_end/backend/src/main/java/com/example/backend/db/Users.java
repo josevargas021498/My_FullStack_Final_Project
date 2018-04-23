@@ -16,7 +16,7 @@ public class Users {
     private static Connection connect() {
         try {
             return DriverManager.getConnection(
-                    "jdbc:postgresql:iRide", "josevargas9817", "Everest1953");
+                    "jdbc:postgresql:iRide", "basecamp", "Everest1953");
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());

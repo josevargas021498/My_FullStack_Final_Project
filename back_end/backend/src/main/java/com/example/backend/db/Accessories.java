@@ -13,7 +13,7 @@ public class Accessories {
         try {
 
             return DriverManager.getConnection(
-                    "jdbc:postgresql:iRide", "josevargas9817", "Everest1953");
+                    "jdbc:postgresql:iRide", "basecamp", "Everest1953");
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -41,7 +41,10 @@ public class Accessories {
                         rs.getString("model"),
                         rs.getInt("price"),
                         rs.getString("dscrptn"),
-                        rs.getInt("stock")
+                        rs.getInt("stock"),
+                        rs.getString("size"),
+                        rs.getString("ofst"),
+                        rs.getString("link")
                 ));
             }
             return allAccessories;

@@ -9,7 +9,7 @@ public class DBConnection {
         try {
 
             return DriverManager.getConnection(
-                    "jdbc:postgresql:iRide", "josevargas9817", "Everest1953");
+                    "jdbc:postgresql:iRide", "basecamp", "Everest1953");
         }
         catch (Exception e) {
             e.printStackTrace();

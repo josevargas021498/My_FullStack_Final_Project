@@ -29,7 +29,7 @@ DROP COLUMN column_name; */
 
         System.out.println(user.sessionkey);
         try {
-            Connection conn = DriverManager.getConnection("jdbc:postgresql:iRide", "josevargas9817", "Everest1953");
+            Connection conn = DriverManager.getConnection("jdbc:postgresql:iRide", "basecamp", "Everest1953");
 
             PreparedStatement st = conn.prepareStatement("DELETE FROM users WHERE sessionkey = ?");
 
