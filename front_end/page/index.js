@@ -52,17 +52,31 @@ function wheels(x) {
         "'" +
         x.link +
         "'" +
+        ', ' +
+        "'" +
+        x.exampleimg +
+        "'" +
         ')"><img src=' +
         x.image +
         ' width="225" height="225"/></a></p>';
     return Wheels;
 }
 
-function showWheel(image, brand, model, price, stock, size, ofst, link) {
+function showWheel(
+    image,
+    brand,
+    model,
+    price,
+    stock,
+    size,
+    ofst,
+    link,
+    exampleimg
+) {
     console.log(image, brand, model, price, stock, size, ofst, link);
     var HTML =
         '<div id="js-data"><h1 id="branding">- Upgrade Your Stance Today! -</h1>';
-    HTML += '<img id="wheelshwn" src=' + image + ' alt="Fuel Hostage">';
+    HTML += '<img id="wheelshwn" src=' + image + '>';
     HTML +=
         "<h4> <a href='https://www.wheelsforless.com/offroad_wheels_and_tires.htm'><b>Complete Wheel Set Ups Here! </b></a></h4> <h4><b>Life Time Warrantee!</h4></b>";
     HTML += "<a href='" + link + "' id='ordbtn' > Order It!</a>";
@@ -77,12 +91,20 @@ function showWheel(image, brand, model, price, stock, size, ofst, link) {
     le_sde += '<h3><b>Size: </b>' + size + '</h3><hr>';
     le_sde += '<h3><b>Offset: </b>' + ofst + '</h3><hr>';
     le_sde += '<h3><b>Price(4): $</b>' + price + '</h3><hr>';
-    le_sde += '<h3><b>Popularity(0-25): </b>' + stock + '</h3><hr>';
+    le_sde += '<h3><b>Popularity(0-25): </b>' + stock + '</h3><hr><hr>';
+    le_sde += '<a href="' + exampleimg + '">See It Installed!</a>';
 
     $('.area-main').html(HTML);
     $('.de').html(le_sde);
 }
 
+// function showex(exampleimg) {
+//     var HTML =
+//         '<div id="js-data"><h1 id="branding"> Upgrade Your Stance Today! </h1>';
+//     HTML += '<img id="eximgshown" src=' + exampleimg + '>';
+
+//     $('.area-main').html(HTML);
+// }
 // function showWheel(image, brand, dscrptn, model, price, stock) {
 //   console.log(image, brand, dscrptn, model, price, stock);
 //   var HTML =
@@ -103,11 +125,6 @@ function showWheel(image, brand, model, price, stock, size, ofst, link) {
 //   $(".area-main").html(HTML);
 //   $(".de").html(le_sde);
 // }t
-function logoutButton(id) {
-    $('#logout-button').html(
-        '<button onclick="Logout(' + id + ')"><b>Log-Out</b></button>'
-    );
-}
 
 /* --------------------------------------------------- LogOut --------------------------------------------------- */
 function Logout(id) {
@@ -121,12 +138,12 @@ function Logout(id) {
             key: window.localStorage.getItem('sessionKey')
         })
     })
-        .then(function successfulShowWheels(response) {
+        .then(function successfulLogout(response) {
             console.log(response);
             window.localStorage.removeItem('sessionKey');
             window.location = '../signup-login/index.html';
         })
-        .catch(function successfulShowWheels(response) {
+        .catch(function unsuccessfulLogout(response) {
             console.log('Status: ' + response.status);
             console.log('JSON: ' + response.responseJSON);
         });
@@ -134,13 +151,13 @@ function Logout(id) {
 
 /* ------------------------------------------------------------------------------------------------------ */
 
-function deleteAccountButton(key) {
-    $('#del-acc-button').html(
-        '<button onclick="deleteUser(' +
-            key +
-            ')"><b>Delete Account</b></button>'
-    );
-}
+// function deleteAccountButton(key) {
+//     $('#del-acc-button').html(
+//         '<button onclick="deleteUser(' +
+//             key +
+//             ')"><b>Delete Account</b></button>'
+//     );
+// }
 /* -------------------------------------------------- Delete User -------------------------------------------------- */
 function deleteUser(key) {
     $.ajax({
@@ -168,7 +185,7 @@ function deleteUser(key) {
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-function showAllWheels() {
+function showAllWheels(id, key) {
     $.ajax({
         url: 'http://localhost:8080/accessories',
         method: 'POST',
@@ -179,6 +196,12 @@ function showAllWheels() {
         .then(function successfulShowWheels(response) {
             console.log(response);
             var wheel =
+                '<button onclick="Logout(' +
+                id +
+                ')"><b>Log-Out</b></button>' +
+                '<button onclick="deleteUser(' +
+                key +
+                ')"><b>Delete Account</b></button>' +
                 '<div id="wheel"><h1><strong>WHEELS</strong></h1><hr></div>' +
                 response
                     .map(function(x) {
@@ -199,8 +222,6 @@ function draw() {
 
 function main() {
     draw();
-    logoutButton();
-    deleteAccountButton();
 }
 
 $(main());

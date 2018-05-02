@@ -50,7 +50,7 @@ INSERT INTO wheels (id, imge, brand, model, price, dscrptn, stock, size, ofst, l
 (2, 'https://images.customwheeloffset.com/wheels/fuel/assault/assault_black_white.jpg', 'Fuel', 'Assault', 1349, 'The Fuel Assault ... ', 13, '22x12', '-44', 'https://www.customwheeloffset.com/buy-wheel-offset/D54622201747/fuel-assault-22x12-44-custom-wheels?suspension=Stock&trimming=No+trimming'),
 (3, 'https://images.customwheeloffset.com/wheels/fuel/vapor/vapor_black_white.jpg', 'Fuel', 'Vapor', 1250, 'The Fuel Vapor ... ', 19, '20x12', '-44', 'https://www.customwheeloffset.com/buy-wheel-offset/D56020201847/fuel-vapor-20x12-44-custom-wheels?suspension=Stock&trimming=No+trimming'),
 (4, 'https://images.customwheeloffset.com/wheels/fuel/lethal/lethal_chrome_white.jpg', 'Fuel', 'Lethal', 1300, 'The Fuel Lethal ... ', 15, '20x12', '-44', 'https://www.customwheeloffset.com/buy-wheel-offset/D56720201747/fuel-lethal-20x12-44-custom-wheels?suspension=Stock&trimming=No+trimming'),
-(5, 'https://images.customwheeloffset.com/wheels/xd/xd822/xd822_black_white.jpg', 'XD', 'Moster II', 1219, 'The XD Monster II ... ', 13, '20x10', '-24', 'https://www.customwheeloffset.com/buy-wheel-offset/XD82221035724N/xd-xd822-20x10-24-custom-wheels?suspension=Stock&trimming=No+trimming'),
+(5, 'https://images.customwheeloffset.com/wheels/xd/xd822/xd822_black_white.jpg', 'XD', 'Monster II', 1219, 'The XD Monster II ... ', 13, '20x10', '-24', 'https://www.customwheeloffset.com/buy-wheel-offset/XD82221035724N/xd-xd822-20x10-24-custom-wheels?suspension=Stock&trimming=No+trimming'),
 (6, 'https://images.customwheeloffset.com/wheels/xd/xs811/xs811_black_white.jpg', 'XD', 'Rockstar II', 1499, 'The XD Rockstar II ... ', 23, '20x7', '0', 'https://www.customwheeloffset.com/buy-wheel-offset/XS81120740700/xd-xs811-20x7-0-custom-wheels?suspension=Stock&trimming=No+trimming'),
 (7, 'https://images.customwheeloffset.com/wheels/xd/xs827/xs827_black_white.jpg', 'XD', 'Rockstar 3', 1599, 'The XD Rockstar 3 ... ', 11, '20x7', '0', 'https://www.customwheeloffset.com/buy-wheel-offset/XS82720744700/xd-xs827-20x7-0-custom-wheels?suspension=Stock&trimming=No+trimming'),
 (8, 'https://images.customwheeloffset.com/wheels/dickcepek/dc2/dc2_black_white.jpg', 'Dick Cepek', 'DC2', 985, 'The Dick Cepek DC2 ... ', 12, '20x12', '-50', 'https://www.customwheeloffset.com/buy-wheel-offset/90000000469/dick-cepek-dc-2-20x12-50-custom-wheels?suspension=Stock&trimming=No+trimming'),
@@ -68,19 +68,35 @@ INSERT INTO wheels (id, imge, brand, model, price, dscrptn, stock, size, ofst, l
 
 
 ----- MANIPULATION -----
-ALTER TABLE wheels ADD rel_img TEXT;
-
-UPDATE wheels SET rel_img = ''
-
-
 
 ALTER TABLE wheels ADD size VARCHAR(100);
 ALTER TABLE wheels ADD ofst VARCHAR(100);
+ALTER TABLE wheels ADD exampleimg TEXT;
 
 UPDATE wheels SET link = 'https://www.customwheeloffset.com/buy-wheel-offset/D26620209847/fuel-lethal-20x12-44-custom-wheels?suspension=Stock&trimming=No+trimming' WHERE model = 'Lethal';
 UPDATE wheels SET size = '20x12.5' WHERE id = 1;
 UPDATE wheels SET ofst = '-44' WHERE id = 1;
 UPDATE wheels SET link = 'https://www.customwheeloffset.com/buy-wheel-offset/D53120401745/fuel-hostage-20x14-76-custom-wheels?suspension=Stock&trimming=No+trimming' WHERE id=1;
+
+
+UPDATE wheels SET exampleimg = 'http://img.tapatalk.com/d/13/06/24/a4ypy6eq.jpg' WHERE model = 'Hostage';
+UPDATE wheels SET exampleimg = 'http://b.cdnbrm.com/images/products/rell/wheels/fuel_assault_wheels_f250_lifestyle.jpg' WHERE model = 'Assault';
+UPDATE wheels SET exampleimg = 'http://2-photos.motorcar.com/used-2015-ram-2500-bighornblackouteditionleveled-7982-17166009-3-640.jpg' WHERE model = 'Vapor';
+UPDATE wheels SET exampleimg = 'https://images.customwheeloffset.com/web/60744-8-2016-sierra-1500-gmc-suspension-lift-9-fuel-lethal-black-super-aggressive-3-5.jpg' WHERE model = 'Lethal';
+UPDATE wheels SET exampleimg = 'https://www.f150forum.com/attachments/f4/193097d1360869565t-20x10-12-offset-xd-monster-truck4.jpg' WHERE model = 'Monster II';
+UPDATE wheels SET exampleimg = 'https://images-na.ssl-images-amazon.com/images/I/61Qe3emxQKL.jpg' WHERE model = 'Rockstar 3';
+UPDATE wheels SET exampleimg = 'https://www.carid.com/images/fuel/wheels/fuel-octane-deep-lip-matte-black-ford-f150-2.jpg' WHERE model = 'Rockstar II';
+UPDATE wheels SET exampleimg = 'https://mrwheeldeal.com/images/donny-bell-4.jpg' WHERE model = 'DC2';
+UPDATE wheels SET exampleimg = 'https://images.customwheeloffset.com/web/62008-7-2011-silverado-1500-chevrolet-leveling-kit-moto-metal-mo970-black-super-aggressive-3-5.jpg' WHERE model = 'MO970';
+UPDATE wheels SET exampleimg = 'https://images.customwheeloffset.com/web/40175-1-2008-silverado-1500-chevrolet-suspension-lift-35-moto-metal-mo975-machined-accents-super-aggressive-3-5.jpg' WHERE model = 'MO975';
+UPDATE wheels SET exampleimg = 'https://images.customwheeloffset.com/web/19067-1-2014-1500-ram-suspension-lift-45-moto-metal-mo969-black-super-aggressive-3-5.jpg' WHERE model = 'MO969';
+UPDATE wheels SET imge = 'https://images.customwheeloffset.com/wheels/xtrememudder/xm304/xm304_blackmilled_white.jpg',exampleimg = 'https://images.customwheeloffset.com/web/314217-4-2015-silverado-1500-chevrolet-fab-tech-suspension-lift-6in-extreme-mudders-other-black.jpg' WHERE model = 'XM-318';
+UPDATE wheels SET exampleimg = 'https://images.customwheeloffset.com/web/318622-15-2016-1500-ram-rough-country-suspension-lift-6in-xtreme-mudder-xm-304-machined-black.jpg' WHERE model = 'XM-314';
+UPDATE wheels SET exampleimg = 'https://images.customwheeloffset.com/web/1800-1-2010-silverado-1500-chevrolet-75-suspension-lift-gear-alloy-726-chrome-super-aggressive-3.jpg' WHERE model = 'XM-319 Silver';
+UPDATE wheels SET exampleimg = 'https://images.customwheeloffset.com/thumb/375317-1-2012-silverado-1500-chevrolet-rough-country-suspension-lift-5in-fuel-hostage-chrome.jpg' WHERE model = 'XM-318 Silver';
+UPDATE wheels SET exampleimg = 'http://images.customwheels4u.com/images/gallery/Worx_803_Beast_Jeep_152.jpg-800.jpg' WHERE model = 'Clash';
+UPDATE wheels SET exampleimg = 'https://images.customwheeloffset.com/web/49538-1-2011-2500-ram-suspension-lift-5-worx-beast-ii-black-super-aggressive-3-5.jpg' WHERE model = 'Beast 803SB';
+UPDATE wheels SET exampleimg = 'http://images.socalcustomwheels.com/images/gallery/fuel-beast6.jpg' WHERE model = 'Destroyer';
 
 -- INSERT INTO wheels (id, name, dmtr, width, whl_offset, stock, brnd_id) VALUES -----
 

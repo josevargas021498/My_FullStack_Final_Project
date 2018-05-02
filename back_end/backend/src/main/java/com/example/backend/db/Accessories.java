@@ -44,7 +44,8 @@ public class Accessories {
                         rs.getInt("stock"),
                         rs.getString("size"),
                         rs.getString("ofst"),
-                        rs.getString("link")
+                        rs.getString("link"),
+                        rs.getString("exampleimg")
                 ));
             }
             return allAccessories;
